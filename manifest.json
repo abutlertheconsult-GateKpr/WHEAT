@@ -1,26 +1,25 @@
 {
-  "name": "WHEAT",
-  "short_name": "WHEAT",
+  "name": "Wheat",
+  "short_name": "Wheat",
   "description": "Your ministry assistant to help track return visits, follow ups, and other ministry activities.",
-  "start_url": "/WHEAT/index.html",
-  "scope": "/WHEAT/",
-  "display": "standalone",
+"start_url": "/Wheat/index.html",
+"scope": "/Wheat/",
+  "display": "fullscreen",
   "orientation": "portrait",
-  "background_color": "#080809",
-  "theme_color": "#ff4d00",
+  "background_color": "#111110",
+  "theme_color": "#111110",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icon-512.png",
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "categories": ["productivity", "tools", "education"],
+  ]
 }
