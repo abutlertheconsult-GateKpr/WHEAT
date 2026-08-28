@@ -1,9 +1,9 @@
 {
-  "name": "Wheat",
-  "short_name": "Wheat",
+  "name": "WHEAT",
+  "short_name": "WHEAT",
   "description": "Your ministry assistant to help track return visits, follow ups, and other ministry activities.",
-"start_url": "/Wheat/index.html",
-"scope": "/Wheat/",
+"start_url": "/WHEAT/index.html",
+"scope": "/WHEAT/",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#111110",
