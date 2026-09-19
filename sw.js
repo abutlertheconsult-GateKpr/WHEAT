@@ -1,5 +1,5 @@
 // Wheat — Service Worker
-const CACHE = 'WHEAT-v2';
+const CACHE = 'WHEAT-v1';
 const BASE = '/WHEAT';
 const ASSETS = [
   './',
