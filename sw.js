@@ -2,15 +2,15 @@
 const CACHE = 'WHEAT-v1';
 const BASE = '/WHEAT';
 const ASSETS = [
-  BASE + '/',
-  BASE + '/index.html',
-  BASE + '/manifest.json',
-  BASE + '/icon-192.png',
-  BASE + '/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // Install — cache all assets
+// Install — cache app assets
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(CACHE).then((cache) => {
@@ -20,33 +20,37 @@ self.addEventListener('install', (e) => {
 });
 
 // Activate — delete old caches
-self.addEventListener('activate', e => {
+self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
-// Fetch — cache first, fallback to network
-self.addEventListener('fetch', e => {
+// Fetch — serve from cache, fallback to network
+self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   if (e.request.url.includes('firestore.googleapis.com')) return;
-  if (e.request.url.includes('fonts.googleapis.com') ||
-      e.request.url.includes('fonts.gstatic.com')) return;
+  if (
+    e.request.url.includes('fonts.googleapis.com') ||
+    e.request.url.includes('fonts.gstatic.com')
+  ) return;
 
   e.respondWith(
-    caches.match(e.request).then(cached => {
+    caches.match(e.request).then((cached) => {
       if (cached) return cached;
-      return fetch(e.request).then(response => {
+      return fetch(e.request).then((response) => {
         if (response && response.status === 200 && response.type === 'basic') {
           const clone = response.clone();
-          caches.open(CACHE).then(cache => cache.put(e.request, clone));
+          caches.open(CACHE).then((cache) => cache.put(e.request, clone));
         }
         return response;
       }).catch(() => {
         if (e.request.mode === 'navigate') {
-          return caches.match(BASE + '/index.html');
+          return caches.match('./index.html') || caches.match('./');
         }
       });
     })
